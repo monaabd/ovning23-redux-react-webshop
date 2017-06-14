@@ -1,5 +1,8 @@
 body {
+  background-image:url(japanese-cherry.jpeg);    
   margin: 0;
+  background-size:cover;
+  
   padding: 0;
   font-family: sans-serif;
 }

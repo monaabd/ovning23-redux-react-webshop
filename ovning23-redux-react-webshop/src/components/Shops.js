@@ -3,16 +3,23 @@ import React from 'react';
 function Shops(props) {
     
     let i=0;
-	const list = props.productsVariable.map( x => <li id={x.flowersName+x.flowersPrice} key={i++}>name: {x.flowersName} price: {x.flowersPrice} <img className="productsImg" src={x.flowersImg} alt={x.flowersName} /> <button onClick={onClickbasket}>Add to your basket</button></li> )
+	const list = props.productsVariable.map( x => <li id={x.flowersName+x.flowersPrice} key={i++}>name: {x.flowersName} price: {x.flowersPrice} <img className="productsImg" src={x.flowersImg} alt={x.flowersName} /> 
+    <button onClick={addToBasketShop} id= {x.flowersName+x.flowersPrice}> Add to your basket</button></li> )
                                             
-	return <ul>{list}</ul>
-}
+	return ( <div><h1> Shopping page</h1>
+                                   
+            <ul>{list}</ul>
+            <div className="showBasket"> my basket </div>
+            </div>                                
+          );
 
-  function onClickbasket (e){
+          
+
+  function addToBasketShop (e){
         
-    //props.addToBasket(e.target.id);
-    console.log('onBasket');
+    props.addToBasket(e.target.id);
+   
     }                                          
-                                            
+}
                                             
 export default Shops;

@@ -20,20 +20,20 @@ function ActionAddProduct(name, price, image) {
 	}
 }
 
-function ActionDeleteProduct(name, price, image) {
+function ActionDeleteProduct(id,name, price, image) {
 	return {
 		type: DELETEPRODUCT,
-        
+        id: id,
 		flowersName: name,
         flowersPrice:price,
         flowersImg:image
 	}
 }
-function ActionBasket(name, price) {
+function ActionBasket(id,name, price) {
 	return {
         
 		type: BASKET,
-        id:name+price,
+        id:id,
 		flowersName: name,
         flowersPrice:price
         
@@ -44,7 +44,7 @@ function actionHistory(action) {
 	return {
 		type: HISTORY,
 		action,
-        color:color,
+        
 	}
 }
 

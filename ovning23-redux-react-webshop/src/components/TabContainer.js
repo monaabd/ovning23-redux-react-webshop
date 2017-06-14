@@ -4,7 +4,7 @@ import Products from './Products';
 import History from './History';
 
 // ny komponent
-import {actionChangeTab,ActionAddProduct,ActionBasket,actionHistory} from '../actions/actions.js';
+import {actionChangeTab,ActionAddProduct,ActionBasket,ActionDeleteProduct,actionHistory} from '../actions/actions.js';
 // nya actions
 import {connect} from 'react-redux';
 
@@ -16,15 +16,16 @@ class TabComponent extends Component {
 		this.handleClickShop = this.handleClickShop.bind(this)
 		this.Addproduct=this.Addproduct.bind(this);
         this.addToBasket=this.addToBasket.bind(this);
+        this.handleClickDeleteProduct = this.handleClickDeleteProduct.bind(this);
 	}
 	render() {
 		let view;
 		if( this.props.tab === 1 ) {
             //productsVar is what we make here and then in our Producs comp will map into it , this props.products is from functions down which has stat.prod
-			view = <Products productsVariable={this.props.products} Addproduct={this.Addproduct}/>;
+			view = <Products productsVariable={this.props.products} Addproduct={this.Addproduct} handleClickDeleteProduct={this.handleClickDeleteProduct}/>;
 		} else if( this.props.tab === 2 ) {
             
-			view = <Shops productsVariable={this.props.products} addToBasket={this.addToBasket}/>;
+			view = <Shops productsVariable={this.props.products} addToBasket={this.addToBasket} />;
 		
 		} else if( this.props.tab === 3 ) {
 			view = <History history={this.props.history} />;
@@ -58,15 +59,21 @@ class TabComponent extends Component {
 	handleClickHistory(e) {
 		this.changeTab(3);
 	}
+    handleClickDeleteProduct(e) {
+        let x = e.target.id;
+        let action = ActionDeleteProduct(x);
+        this.props.dispatch( action );
+        this.props.dispatch( actionHistory(action) );
+}
     
-    // called in products
+    // called the Addproduct function here and in products with props
 	Addproduct(name, price, image){
      let action= ActionAddProduct(name, price, image); //we make data packaged
         this.props.dispatch(action); //we send the package to post office updates state
         this.props.dispatch(actionHistory(action));
 
     }
-    addToBasket(id){
+    addToBasket(e){
         let eachProduct = this.props.products;
         //after finding all the product we need to find that specific id, which below u see
           function find(key1, value) {
@@ -75,21 +82,25 @@ class TabComponent extends Component {
               //first product in arrey is 0
 			    for (var key in eachProduct) {
 		        var currentProduct = eachProduct[key];
+                    
 		        if (currentProduct[key1] === value) {
 		            return i;
 		        }
 		        i++;
 			    }
 			   return -1;
-   let findId= find('id',id); 
+              } 
+              
+   let findId= find('id',e); 
+    console.log(findId,'finded'); 
    let findedProduct = this.props.products[findId];
-     let action = ActionBasket(findedProduct.flowersName,findedProduct.flowersPrice); 
+              
+     let action = ActionBasket(findedProduct.id,findedProduct.flowersName,findedProduct.flowersPrice);
+        console.log(action,'act')
     this.props.dispatch(action); //we send the package to post office updates state
     this.props.dispatch(actionHistory(action));          
-  console.log(findedProduct);
-}  
         
-    }
+}//addToBasket
 	
 	changeTab(tab) {
 		let action = actionChangeTab(tab);
@@ -104,6 +115,7 @@ function mapStateToProps(state) {
 		tab: state.tab,
         products: state.products,
         shops: state.products,
+        basket:state.basket,
 		history: state.history
 		
 	}

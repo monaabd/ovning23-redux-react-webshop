@@ -5,7 +5,7 @@ import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 import {createStore, combineReducers} from 'redux';
 import {Provider} from 'react-redux'; 
-import {tabReducer, productsReducer,shopsReducer, historyReducer} from './reducers/reducers.js';
+import {tabReducer, productsReducer,basketReducer, historyReducer} from './reducers/reducers.js';
 
 
 let initialState = {
@@ -36,8 +36,8 @@ let initialState = {
 let rootReducer = combineReducers({
 	tab: tabReducer,
 	products:productsReducer,
-    shops:shopsReducer,
-    basket:shopsReducer,
+    shops:basketReducer,
+    basket:basketReducer,
     history:historyReducer
 });
 const store = createStore(rootReducer, initialState);
