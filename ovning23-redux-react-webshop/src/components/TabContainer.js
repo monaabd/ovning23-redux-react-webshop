@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import Shops from './Shops';
 import Products from './Products';
+import Basket from './Basket';
 import History from './History';
 
-// ny komponent
+
 import {actionChangeTab,ActionAddProduct,ActionBasket,ActionDeleteProduct,actionHistory} from '../actions/actions.js';
-// nya actions
+//  actions
 import {connect} from 'react-redux';
 
 class TabComponent extends Component {
@@ -16,7 +17,9 @@ class TabComponent extends Component {
 		this.handleClickShop = this.handleClickShop.bind(this)
 		this.Addproduct=this.Addproduct.bind(this);
         this.addToBasket=this.addToBasket.bind(this);
+        this.handleClickBasket=this.handleClickBasket.bind(this);
         this.handleClickDeleteProduct = this.handleClickDeleteProduct.bind(this);
+        
 	}
 	render() {
 		let view;
@@ -30,6 +33,9 @@ class TabComponent extends Component {
 		} else if( this.props.tab === 3 ) {
 			view = <History history={this.props.history} />;
 		} 
+        else if( this.props.tab === 4 ) {
+			view = <Basket basket={this.props.basket} />;
+		} 
 		return (
 			<div className="App">
             <div className="tabheader">
@@ -38,6 +44,7 @@ class TabComponent extends Component {
 				
 				<button onClick={this.handleClickHistory}>History</button>
 				
+                <button onClick={this.handleClickBasket}>Basket</button>
 				
 			</div>
 			<div className="tabbody">
@@ -59,6 +66,10 @@ class TabComponent extends Component {
 	handleClickHistory(e) {
 		this.changeTab(3);
 	}
+    
+    handleClickBasket(e) {
+		this.changeTab(4);
+    }
     handleClickDeleteProduct(e) {
         let x = e.target.id;
         let action = ActionDeleteProduct(x);

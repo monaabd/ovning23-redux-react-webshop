@@ -1,25 +1,21 @@
-import React from 'react';
+import React, { Component } from 'react';
+import '../App.css';
 
-function Shops(props) {
+function Basket(props) {
     
     let i=0;
 	const list = props.productsVariable.map( x => <li id={x.flowersName+x.flowersPrice} key={i++}>name: {x.flowersName} price: {x.flowersPrice} <img className="productsImg" src={x.flowersImg} alt={x.flowersName} /> 
-    <button onClick={addToBasketShop} id= {x.flowersName+x.flowersPrice}> Add to your basket</button></li> )
+    </li> );
                                             
-	return ( <div><h1> Shopping page</h1>
+	return ( <div><h1> Basket page</h1>
                                    
             <ul>{list}</ul>
             
             </div>                                
           );
 
-          
-
-  function addToBasketShop (e){
-        
-    props.addToBasket(e.target.id);
-   
-    }                                          
+                     
 }
-                                            
-export default Shops;
+
+    
+export default Basket;
