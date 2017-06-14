@@ -29,13 +29,14 @@ function ActionDeleteProduct(id,name, price, image) {
         flowersImg:image
 	}
 }
-function ActionBasket(id,name, price) {
+function ActionBasket(id,name, price,image) {
 	return {
         
 		type: BASKET,
         id:id,
 		flowersName: name,
-        flowersPrice:price
+        flowersPrice:price,
+        flowersImg:image
         
 	}
 }

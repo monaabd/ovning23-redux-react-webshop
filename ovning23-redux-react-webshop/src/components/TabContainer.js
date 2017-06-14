@@ -34,7 +34,7 @@ class TabComponent extends Component {
 			view = <History history={this.props.history} />;
 		} 
         else if( this.props.tab === 4 ) {
-			view = <Basket basket={this.props.basket} />;
+			view = <Basket  productsVariable={this.props.basket}/>;
 		} 
 		return (
 			<div className="App">
@@ -106,7 +106,7 @@ class TabComponent extends Component {
     console.log(findId,'finded'); 
    let findedProduct = this.props.products[findId];
               
-     let action = ActionBasket(findedProduct.id,findedProduct.flowersName,findedProduct.flowersPrice);
+     let action = ActionBasket(findedProduct.id,findedProduct.flowersName,findedProduct.flowersPrice,findedProduct.flowersImg);
         console.log(action,'act')
     this.props.dispatch(action); //we send the package to post office updates state
     this.props.dispatch(actionHistory(action));          
