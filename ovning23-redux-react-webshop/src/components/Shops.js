@@ -8,7 +8,7 @@ function Shops(props) {
                                             
 	return ( <div><h1> Shopping page</h1>
                                    
-            <ul>{list}</ul>
+            <ul className="ProductList">{list}</ul>
             
             </div>                                
           );

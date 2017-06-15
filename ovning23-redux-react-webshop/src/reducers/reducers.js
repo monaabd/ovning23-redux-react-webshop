@@ -1,4 +1,4 @@
-import { CHANGE_TAB, ADDPRODUCT,BASKET,DELETEPRODUCT,HISTORY} from '../actions/actions.js';
+import { CHANGE_TAB, ADDPRODUCT,BASKET,DELETEPRODUCT,DELETEBASKET,HISTORY} from '../actions/actions.js';
 
 /*function rootReducer(state = initialState, action) {
 	console.log('rootReducer state:', state, action)
@@ -47,6 +47,12 @@ function basketReducer(state = [], action) {
 		case BASKET:
             //takes the basket which is in state 
           return [...state, action];
+        case DELETEBASKET:
+            let Removed=
+                state.filter(function(element){
+                 return element.id !== action.id;    
+        });
+            return Removed;
 		default:
 			return state;
 	}

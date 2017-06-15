@@ -3,6 +3,7 @@ const ADDPRODUCT = 'ADDPRODUCT';
 const HISTORY = 'HISTORY';
 const DELETEPRODUCT='DELETEPRODUCT';
 const BASKET='BASKET';
+const DELETEBASKET='DELETEBASKET';
 function actionChangeTab(selectedTab) {
 	return {
 		type: CHANGE_TAB,
@@ -12,7 +13,7 @@ function actionChangeTab(selectedTab) {
 
 function ActionAddProduct(name, price, image) {
 	return {
-		type: ADDPRODUCT,
+		type : ADDPRODUCT,
         id:name+price,
 		flowersName: name,
         flowersPrice:price,
@@ -40,6 +41,15 @@ function ActionBasket(id,name, price,image) {
         
 	}
 }
+function ActionDeleteBasket(id,name, price, image) {
+	return {
+		type: DELETEBASKET,
+        id: id,
+		flowersName: name,
+        flowersPrice:price,
+        flowersImg:image
+	}
+}
 
 function actionHistory(action) {
 	return {
@@ -49,7 +59,8 @@ function actionHistory(action) {
 	}
 }
 
-export { CHANGE_TAB, actionChangeTab, ADDPRODUCT,ActionAddProduct, DELETEPRODUCT,ActionDeleteProduct,BASKET,ActionBasket, HISTORY, actionHistory,
+
+export { CHANGE_TAB, actionChangeTab, ADDPRODUCT,ActionAddProduct, DELETEPRODUCT,ActionDeleteProduct,BASKET,ActionBasket,DELETEBASKET,ActionDeleteBasket,HISTORY, actionHistory,
 };
 
 

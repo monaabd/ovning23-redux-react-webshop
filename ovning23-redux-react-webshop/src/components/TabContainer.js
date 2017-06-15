@@ -5,7 +5,7 @@ import Basket from './Basket';
 import History from './History';
 
 
-import {actionChangeTab,ActionAddProduct,ActionBasket,ActionDeleteProduct,actionHistory} from '../actions/actions.js';
+import {actionChangeTab,ActionAddProduct,ActionBasket,ActionDeleteBasket,ActionDeleteProduct,actionHistory} from '../actions/actions.js';
 //  actions
 import {connect} from 'react-redux';
 
@@ -18,6 +18,7 @@ class TabComponent extends Component {
 		this.Addproduct=this.Addproduct.bind(this);
         this.addToBasket=this.addToBasket.bind(this);
         this.handleClickBasket=this.handleClickBasket.bind(this);
+        this.handleClickDeleteBasket=this.handleClickDeleteBasket.bind(this);
         this.handleClickDeleteProduct = this.handleClickDeleteProduct.bind(this);
         
 	}
@@ -34,7 +35,7 @@ class TabComponent extends Component {
 			view = <History history={this.props.history} />;
 		} 
         else if( this.props.tab === 4 ) {
-			view = <Basket  productsVariable={this.props.basket}/>;
+			view = <Basket  productsVariable={this.props.basket} handleClickDeleteBasket={this.handleClickDeleteBasket}/>;
 		} 
 		return (
 			<div className="App">
@@ -76,6 +77,12 @@ class TabComponent extends Component {
         this.props.dispatch( action );
         this.props.dispatch( actionHistory(action) );
 }
+    handleClickDeleteBasket(e) {
+        let x = e.target.id;
+        let action = ActionDeleteBasket(x);
+        this.props.dispatch( action );
+        this.props.dispatch( actionHistory(action) );
+}
     
     // called the Addproduct function here and in products with props
 	Addproduct(name, price, image){
@@ -103,11 +110,11 @@ class TabComponent extends Component {
               } 
               
    let findId= find('id',e); 
-    console.log(findId,'finded'); 
+    
    let findedProduct = this.props.products[findId];
               
      let action = ActionBasket(findedProduct.id,findedProduct.flowersName,findedProduct.flowersPrice,findedProduct.flowersImg);
-        console.log(action,'act')
+        
     this.props.dispatch(action); //we send the package to post office updates state
     this.props.dispatch(actionHistory(action));          
         
@@ -121,7 +128,7 @@ class TabComponent extends Component {
 }
 
 function mapStateToProps(state) {
-	console.log('state:', state);
+	
 	return {
 		tab: state.tab,
         products: state.products,

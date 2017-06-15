@@ -15,12 +15,13 @@ function Products(props) {
 	return (
         <div><h1> Admin page</h1>
         
-        <ul>{list}</ul>
+        <ul className="ProductList">{list}</ul>
         
-        <input onChange={changename}type="text"  placeholder="flowersName"/>
-        <input onChange={changeprice} type=""  placeholder="flowersName"/>
-        <input onChange={changeimage} type="text"  placeholder="flowersName"/>
-        <button onClick={addProduct}>Add This Product</button>                                            
+        <div className="Form">
+        <input onChange={changename}type="text"  placeholder="FlowersName"/>
+        <input onChange={changeprice} type="number"  placeholder="FlowersPrice"/>
+        <input onChange={changeimage} type="text"  placeholder="FlowersUrl"/>
+        <button onClick={addProduct}>Add This Product</button> </div>                            
         </div>
 );
     function changename(e){
